@@ -1,8 +1,10 @@
 package com.data.register.api.data_register_rest_api.controllers;
 
 import com.data.register.api.data_register_rest_api.models.Register;
+import com.data.register.api.data_register_rest_api.models.User;
 import com.data.register.api.data_register_rest_api.models.repositories.RegisterRepository;
 import com.data.register.api.data_register_rest_api.models.repositories.UserRepository;
+import com.data.register.api.data_register_rest_api.utils.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,34 +21,24 @@ public class RegisterController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/{userId}")
-    public List<Register> getCoursesByInstructor(@PathVariable(value = "userId") String userId) {
-        return registerRepository.findByUser(userId);
+    @GetMapping("/user_registers")
+    public List<Register> getCoursesByInstructor(@RequestParam(value = "userId") String userId) throws ResourceNotFoundException {
+        User u = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("Invalid username"));
+        return registerRepository.findByUser(u);
     }
-
-   /* @PostMapping(path = "/add")
-    public void saveRegister(@RequestBody Register register) {
-        registerRepository.save(register);
-    }*/
 
     @GetMapping(path = "/all")
     public Iterable<Register> getAllRegisters() {
         return registerRepository.findAll();
     }
 
-    @PostMapping("/add/{userId}/")
-    public Register createCourse(@PathVariable(value = "userId") String userId,
-                                 @Valid @RequestBody Register register) {
+    @PostMapping("/add")
+    public Register createRegister(@RequestParam(name = "userId") String userId,
+                                   @Valid @RequestBody Register register) throws ResourceNotFoundException {
         return userRepository.findById(userId).map(user -> {
             register.setUser(user);
             return registerRepository.save(register);
-        }).get();
+        }).orElseThrow(() -> new ResourceNotFoundException("Register could not be created"));
 
     }
-
-   /* @GetMapping(path = "/user_registers")
-    public Iterable<Register> getUserRegisters() {
-
-    }*/
-
 }
