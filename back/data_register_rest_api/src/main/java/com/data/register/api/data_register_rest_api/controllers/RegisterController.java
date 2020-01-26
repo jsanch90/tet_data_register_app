@@ -3,7 +3,6 @@ package com.data.register.api.data_register_rest_api.controllers;
 import com.data.register.api.data_register_rest_api.models.Register;
 import com.data.register.api.data_register_rest_api.models.repositories.RegisterRepository;
 import com.data.register.api.data_register_rest_api.models.repositories.UserRepository;
-import com.data.register.api.data_register_rest_api.utils.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,11 +36,11 @@ public class RegisterController {
 
     @PostMapping("/add/{userId}/")
     public Register createCourse(@PathVariable(value = "userId") String userId,
-                                 @Valid @RequestBody Register register) throws ResourceNotFoundException {
+                                 @Valid @RequestBody Register register) {
         return userRepository.findById(userId).map(user -> {
             register.setUser(user);
             return registerRepository.save(register);
-        }).orElseThrow(() -> new ResourceNotFoundException("instructor not found"));
+        }).get();
 
     }
 
