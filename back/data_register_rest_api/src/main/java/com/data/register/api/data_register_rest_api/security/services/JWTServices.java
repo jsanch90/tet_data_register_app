@@ -10,14 +10,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.data.register.api.data_register_rest_api.security.config.Constants.PREFIX;
-import static com.data.register.api.data_register_rest_api.security.config.Constants.TOKEN_EXPIRATION_TIME;
+import static com.data.register.api.data_register_rest_api.security.config.Constants.*;
 
 @Service
 public class JWTServices {
 
     public String getJWTToken(String username) {
-        String secretKey = "mySecretKey";
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList("ROLE_USER");
 
@@ -32,7 +30,7 @@ public class JWTServices {
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512,
-                        secretKey.getBytes()).compact();
+                        KEY.getBytes()).compact();
         return PREFIX + token;
     }
 
