@@ -10,6 +10,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static com.data.register.api.data_register_rest_api.security.config.Constants.CREATE_USER_ENDPOINT;
+import static com.data.register.api.data_register_rest_api.security.config.Constants.LOGIN_ENDPOINT;
+
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -19,8 +22,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/user/login", "/user/add").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers(HttpMethod.POST, LOGIN_ENDPOINT, CREATE_USER_ENDPOINT)
+                .permitAll()
+                .anyRequest()
+                .authenticated();
     }
 
     @Bean

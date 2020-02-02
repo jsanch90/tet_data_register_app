@@ -8,6 +8,4 @@ import java.util.List;
 
 public interface RegisterRepository extends CrudRepository<Register, Integer> {
     List<Register> findByUser(User u);
-
-    //Optional<Register> findByIdAndUserId(Integer id, String userId);
 }
