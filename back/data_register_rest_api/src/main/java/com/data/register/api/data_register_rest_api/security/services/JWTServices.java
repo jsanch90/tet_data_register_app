@@ -10,6 +10,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.data.register.api.data_register_rest_api.security.config.Constants.PREFIX;
+import static com.data.register.api.data_register_rest_api.security.config.Constants.TOKEN_EXPIRATION_TIME;
+
 @Service
 public class JWTServices {
 
@@ -20,17 +23,17 @@ public class JWTServices {
 
         String token = Jwts
                 .builder()
-                .setId("softtekJWT")
+                .setId("registerAPI")
                 .setSubject(username)
                 .claim("authorities",
                         grantedAuthorities.stream()
                                 .map(GrantedAuthority::getAuthority)
                                 .collect(Collectors.toList()))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 600000))
+                .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512,
                         secretKey.getBytes()).compact();
-        return "Bearer " + token;
+        return PREFIX + token;
     }
 
 }
