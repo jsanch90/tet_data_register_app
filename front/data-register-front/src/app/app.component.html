@@ -8,13 +8,27 @@
   </div>
 </header>
 
-<div class="table-container" style="overflow-x:auto;">
+<div class="login-container" *ngIf="showLogin">
+  <form (ngSubmit)="onSubmitLogin()">
+    <div class="form-group form-container">
+      <label>User</label>
+      <input type="text" [(ngModel)]="user" name="username"/>
+      <label>Password</label>
+      <input type="password" [(ngModel)]="password" name="token"/>
+      <button>
+        Login
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="table-container" style="overflow-x:auto;" *ngIf="!showLogin">
 
   <div>
     <form (ngSubmit)="onSubmit()">
       <div class="form-group form-container">
         <label>User</label>
-        <input type="text" [(ngModel)]="user" name="username"/>
+        <input type="text" [(ngModel)]="user2" name="username"/>
         <button>
           Search
         </button>

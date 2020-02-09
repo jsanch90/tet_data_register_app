@@ -8,10 +8,13 @@ import {ServicesSettings} from './services/ServicesConfig';
 import {GetRegistersService} from './services/getRegisters/get-registers.service';
 import {CookieService} from 'ngx-cookie-service';
 import {FormsModule} from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
+import {LoginService} from './services/login/login.service';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,7 +22,7 @@ import {FormsModule} from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [ServicesSettings, GetRegistersService, CookieService],
+  providers: [ServicesSettings, GetRegistersService, CookieService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
