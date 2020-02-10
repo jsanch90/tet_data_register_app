@@ -1,0 +1,77 @@
+<div class="header">
+  <header class="toolbar">
+    <div class="toolbar-item">
+      <h1 class="main-title">
+        <a class="title-link" href="/">Data Register Application </a>
+      </h1>
+    </div>
+    <div class="logout toolbar-item" *ngIf="!showLogin">
+      <button class="logout-button" (click)="logOut()">logout</button>
+    </div>
+  </header>
+</div>
+<div class="login-container" *ngIf="showLogin">
+  <form (ngSubmit)="onSubmitLogin()">
+    <div class="form-group form-container">
+      <label class="login-label" id="user">User</label>
+      <input class="login-field" type="text" [(ngModel)]="user" name="username"/>
+      <label class="login-label">Password</label>
+      <input id="password-field" class="login-field" type="password" [(ngModel)]="password" name="token"/>
+      <button class="login-button logout-button">
+        Login
+      </button>
+    </div>
+  </form>
+</div>
+<div class="table-container" *ngIf="!showLogin"> <!---->
+  <div class="search-container">
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group form-container">
+        <label class="login-label">User</label>
+        <input id="search-field" class="login-field" type="text" [(ngModel)]="user2" name="username"/>
+        <button class="logout-button login-button">
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+  <table>
+    <tr>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Humidity</th>
+      <th>Temperature</th>
+    </tr>
+  </table>
+  <div class="table-inner-container">
+    <table>
+      <tr *ngFor="let register of registers">
+        <td>{{register.latitude}}</td>
+        <td>{{register.longitude}}</td>
+        <td>{{register.humidity}}</td>
+        <td>{{register.temperature}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<footer class="main-footer">
+  <div class="footer-item">
+    <a href="https://github.com/jsanch90/tet_data_register_app.git" target="_blank">
+      GitHub
+    </a>
+  </div>
+
+  <div class="footer-item">
+    <a href="https://github.com/jsanch90" target="_blank">
+      Joshua Sanchez Alvarez
+    </a>
+  </div>
+
+  <div class="footer-item">
+    <a href="http://www.eafit.edu.co/" target="_blank">
+      Universidad EAFIT
+    </a>
+  </div>
+</footer>
+

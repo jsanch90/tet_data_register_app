@@ -7,5 +7,5 @@ public class Constants {
     public static final String PREFIX = "Bearer ";
     public static final String ISSUER_INFO = "localhost:8080";
     public static final String KEY = "1234";
-    public static final long TOKEN_EXPIRATION_TIME = 600000;
+    public static final long TOKEN_EXPIRATION_TIME = 360000000;//600000;
 }
