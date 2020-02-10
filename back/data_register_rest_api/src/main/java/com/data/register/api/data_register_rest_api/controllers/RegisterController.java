@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "register")
+@CrossOrigin(origins = "*")
 public class RegisterController {
 
     @Autowired
@@ -21,8 +22,8 @@ public class RegisterController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/user_registers")
-    public List<Register> getCoursesByInstructor(@RequestParam(value = "userId") String userId) throws ResourceNotFoundException {
+    @GetMapping(path = "/user_registers")
+    public List<Register> getRegistersByUser(@RequestParam(value = "userId") String userId) throws ResourceNotFoundException {
         User u = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("Invalid username"));
         return registerRepository.findByUser(u);
     }
@@ -32,7 +33,7 @@ public class RegisterController {
         return registerRepository.findAll();
     }
 
-    @PostMapping("/add")
+    @PostMapping(path = "/add")
     public Register createRegister(@RequestParam(name = "userId") String userId,
                                    @Valid @RequestBody Register register) throws ResourceNotFoundException {
         return userRepository.findById(userId).map(user -> {
