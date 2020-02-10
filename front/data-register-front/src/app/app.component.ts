@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
     } else {
       this.getUserData(this.user2);
     }
+    this.user2 = '';
   }
 
   onSubmitLogin() {
@@ -56,5 +57,10 @@ export class AppComponent implements OnInit {
     this.password = '';
   }
 
+  logOut() {
+    this.cookieService.delete('IS_LOGGED');
+    this.cookieService.delete('USER_TOKEN');
+    this.showLogin = true;
+  }
 
 }
