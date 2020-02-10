@@ -1,9 +1,5 @@
 # Proyecto 1 Topicos especiales de telematica
 
-[TOCM]
-
-[TOC]
-
 ## Desarrolador
 
 - Joshua Sánchez Álvarez - jsanch90@eafit.edu.co - Universidad EAFIT
@@ -40,9 +36,9 @@ Para el frontend se empleó Angular 8, desde allí se implementaron unos servici
 | /register/user_registers | GET | Permite recuperar todos los registros de sensores y GPS de un usuario en específico, el nombre de usuario se pasa por los parámetros de la url. | http://localhost:8080/register/user_registers?userId=josh |
 | /register/all | GET | Recupera todos los registros de los sensores y GPS almacenados en la base de datos. | http://localhost:8080/register/all |
 | /register/add | POST** | Añade un registro de los distintos sensores y el GPS a la base de datos, este registro va relacionado con un usuario, el nombre del usuario se pasa por los parámetros de la url. | http://localhost:8080/register/add?userId=josh |
-| /user/add | POST | Añade un usuario nuevo. | http://localhost:8080/user/add |
+| /user/add | POST** | Añade un usuario nuevo. | http://localhost:8080/user/add |
 | /user/all | GET | Retorna todos los usuarios registrados. | http://localhost:8080/user/add |
-| /user/login | POST | Realiza el proceso para autenticar un usuario. | http://localhost:8080/user/login |
+| /user/login | POST** | Realiza el proceso para autenticar un usuario. | http://localhost:8080/user/login |
 
 Los servicios que están marcados con (**) en el método http requieren de un objeto JSON cuando se hace la petición al servicio. A continuación se añaden unos ejemplos de cómo debe ser la estructura de estos objetos.
 
